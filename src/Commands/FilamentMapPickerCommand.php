@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace ItsOnlyJeff\FilamentMapPicker\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentMapPickerCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-map-picker';
 
     public $description = 'My command';
 
