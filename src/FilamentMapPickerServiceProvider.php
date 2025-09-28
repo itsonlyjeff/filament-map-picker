@@ -9,12 +9,12 @@ use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
+use ItsOnlyJeff\FilamentMapPicker\Commands\FilamentMapPickerCommand;
+use ItsOnlyJeff\FilamentMapPicker\Testing\TestsFilamentMapPicker;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ItsOnlyJeff\FilamentMapPicker\Commands\FilamentMapPickerCommand;
-use ItsOnlyJeff\FilamentMapPicker\Testing\TestsFilamentMapPicker;
 
 class FilamentMapPickerServiceProvider extends PackageServiceProvider
 {
