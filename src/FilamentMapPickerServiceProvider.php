@@ -2,16 +2,11 @@
 
 namespace ItsOnlyJeff\FilamentMapPicker;
 
-use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
-use Illuminate\Filesystem\Filesystem;
-use ItsOnlyJeff\FilamentMapPicker\Commands\FilamentMapPickerCommand;
-use ItsOnlyJeff\FilamentMapPicker\Testing\TestsFilamentMapPicker;
-use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -34,8 +29,6 @@ class FilamentMapPickerServiceProvider extends PackageServiceProvider
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
-                    ->publishMigrations()
-                    ->askToRunMigrations()
                     ->askToStarRepoOnGitHub('itsonlyjeff/filament-map-picker');
             });
 
@@ -43,10 +36,6 @@ class FilamentMapPickerServiceProvider extends PackageServiceProvider
 
         if (file_exists($package->basePath("/../config/{$configFileName}.php"))) {
             $package->hasConfigFile();
-        }
-
-        if (file_exists($package->basePath('/../database/migrations'))) {
-            $package->hasMigrations($this->getMigrations());
         }
 
         if (file_exists($package->basePath('/../resources/lang'))) {
@@ -75,18 +64,6 @@ class FilamentMapPickerServiceProvider extends PackageServiceProvider
 
         // Icon Registration
         FilamentIcon::register($this->getIcons());
-
-        // Handle Stubs
-        if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
-                $this->publishes([
-                    $file->getRealPath() => base_path("stubs/filament-map-picker/{$file->getFilename()}"),
-                ], 'filament-map-picker-stubs');
-            }
-        }
-
-        // Testing
-        Testable::mixin(new TestsFilamentMapPicker);
     }
 
     protected function getAssetPackageName(): ?string
@@ -111,9 +88,7 @@ class FilamentMapPickerServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [
-            FilamentMapPickerCommand::class,
-        ];
+        return [];
     }
 
     /**
@@ -145,8 +120,6 @@ class FilamentMapPickerServiceProvider extends PackageServiceProvider
      */
     protected function getMigrations(): array
     {
-        return [
-            'create_filament-map-picker_table',
-        ];
+        return [];
     }
 }
